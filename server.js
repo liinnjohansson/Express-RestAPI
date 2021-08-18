@@ -21,6 +21,12 @@ app.get('/api/shoes/:id', (req, res) => {
     res.json(shoe);
 })
 
+app.post('/api/shoes', (req, res) => {
+    const shoe = req.body;
+    shoes.push(shoe);
+    res.send('The shoe was successfully added to the storage');
+});
+
 app.listen(3000, () => {
     console.log('Server is running at http://localhost:3000');
 });
