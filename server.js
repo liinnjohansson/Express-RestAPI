@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 
+let shoeIdIndex = 1;
 let shoes = []
 
 app.use(express.json());
@@ -16,16 +17,28 @@ app.get('/api/shoes/:id', (req, res) => {
 })
 
 app.post('/api/shoes', (req, res) => {
-    const shoe = req.body;
+    const shoe = {...req.body, id: shoeIdIndex++};
     shoes.push(shoe);
-    res.send('The shoe was successfully added to the storage');
+    res.json(shoe);
 });
 
 app.delete('/api/shoes/:id', (req, res) => {
     const { id } = req.params;
     const i = shoes.findIndex(shoe => shoe.id == id);
-    shoes.splice(i, 1);
-    res.json('REMOVED');
+    if(i != -1)
+    {
+        shoes.splice(i, 1);
+        res.json('Confirm: Item was removed');
+    } else {
+        res.json('Error: Can not find item to remove');
+    }
+})
+
+app.put('/api/shoes/:id', (req, res) => {
+    const { id } = req.params;
+    let shoe = shoes.find(shoe => shoe.id == id);
+    Object.assign(shoe, req.body);
+    res.json(shoe);
 })
 
 app.listen(3000, () => {
