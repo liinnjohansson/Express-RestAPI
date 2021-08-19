@@ -2,9 +2,6 @@ const express = require('express');
 const shoesRouter = require('./shoes.router');
 const app = express();
 
-let shoeIdIndex = 1;
-let shoes = []
-
 app.use(express.json());
 
 app.use(shoesRouter);
