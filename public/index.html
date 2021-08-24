@@ -13,11 +13,29 @@
         <p class="company">The Shoe Storage</p>
     </header>
     <div class="flex col wrap justify-start container">
-        <p>Welcome to The Shoe Storage</p>
-        <button>See all shoes</button>
-        <button>Search</button>
+        <h3>Welcome to The Shoe Storage</h3>
+        <div class="flex row">
+        <button id="all-btn">See all shoes</button>
+        <button id="search-btn">Search</button>
         <button>Add shoe</button>
-        <p class="shoes"></p>
+        </div>
+        <div>
+            <h5 class="sub-header"></h5>
+            <template id="shoe-item-template">
+            <div class="flex col wrap list-item">
+              <p id="list-item-type">Type: </p>
+              <p id="list-item-colour">Colour: </p>
+              <p id="list-item-material">Material: </p>
+              <p id="list-item-size">Size: </p>
+              <p id="list-item-quantity">Quantity: </p>
+              <div class="flex row wrap">
+              <button id="edit-btn">Edit</button>
+              <button id="delete-btn">Delete</button>
+              </div>
+            </div>
+            </template>
+            <ul id="shoe-list"></ul>
+        </div>
     </div>
 </body>
 </html>

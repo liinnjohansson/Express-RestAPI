@@ -1,6 +1,6 @@
 body {
-    background: url(./images/layer.png), url(./images/shoes.jpg);
-    background-size: .2%, 100%;
+    background: url(./images/shoe-background.jpg);
+    background-size: 100vw;
     padding: 0;
     margin: 0;
 }
@@ -13,10 +13,26 @@ header {
 button {
     opacity: 100%;
     border-radius: .5rem;
+    border: .1rem solid black;
     background-color: whitesmoke;
     width: 10rem;
     padding: .5rem;
     margin: .2rem;
+}
+
+h5 {
+    padding: 0;
+    margin-bottom: 0;
+}
+
+p {
+    font-size: 1.2rem;
+    padding: 0;
+    margin: 0;
+}
+
+ul {
+    padding-left: 0;
 }
 
 .company {
@@ -31,11 +47,18 @@ button {
     margin: 3rem;
     width: 40vw;
     font-size: 2rem;
-    border: .15rem solid black;
+    border: .1rem solid black;
     background: white;
     color: #000;
     /* opacity: 80%; */
     border-radius: 0.1rem;
+}
+
+.list-item {
+    padding-left: 0;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: .1rem solid black;
 }
 
 .flex {
@@ -46,8 +69,16 @@ button {
     flex-direction: column;
 }
 
+.row {
+    flex-direction: row;
+}
+
 .wrap {
     flex-wrap: wrap;
+}
+
+.no-wrap {
+    flex-wrap: nowrap;
 }
 
 .justify-start {
