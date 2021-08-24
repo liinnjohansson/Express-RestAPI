@@ -1,43 +1,82 @@
-window.addEventListener('load', main);
+window.addEventListener("load", main);
 
-function main(){
+function main() {
   fetchShoes();
-  addClickEventToFetchAllItemsButton();
+  addClickEventOnFetchAllItemsButton();
+  addClickEventOnSearchButton();
+  addClickEventOnAddButton();
 }
 
-function addClickEventToFetchAllItemsButton() {
+function addClickEventOnFetchAllItemsButton() {
   const btn = document.getElementById("all-btn");
   btn.addEventListener("click", () => fetchShoes());
-
 }
 
+function addClickEventOnSearchButton() {
+  const btn = document.getElementById("search-btn");
+  btn.addEventListener("click", () => displaySearchField());
+}
+
+function addClickEventOnAddButton() {
+  const btn = document.getElementById("add-btn");
+  btn.addEventListener("click", () => addShoe());
+}
+
+function displaySearchField() {
+  const ul = document.getElementById("shoe-list");
+  const searchField = document.getElementById("input-field");
+  const template = document.getElementById("search-template");
+  ul.innerHTML = "";
+  searchField.innerHTML = "";
+  const inputField = template.content.cloneNode(true);
+  const btn = inputField.getElementById("submit-btn");
+  btn.addEventListener("click", () => fetchOneShoe());
+  searchField.append(inputField);
+}
+
+
 async function fetchShoes() {
+  const searchField = document.getElementById("input-field");
   const ul = document.getElementById("shoe-list");
   const template = document.getElementById("shoe-item-template");
   ul.innerHTML = "";
-
-const response = await fetch('/api/shoes');
-    const result = await response.json();
-    console.log(result);
-
-    const subHeader = document.querySelector(".sub-header");
-    subHeader.innerHTML = "All shoes in storage";
-
-  for (const shoeItem of result) {
+  searchField.innerHTML = "";
+  
+  await fetch("/api/shoes")
+  .then((response) => response.json())
+  .then((json) => {
     const listItem = template.content.cloneNode(true);
-    const deleteBtn = listItem.getElementById("delete-btn");
-    const editBtn = listItem.getElementById("edit-btn");
-    const shoeItemType = listItem.querySelector("#list-item-type");
-    const shoeItemColour = listItem.querySelector("#list-item-colour");
-    const shoeItemMaterial = listItem.querySelector("#list-item-material");
-    const shoeItemSize = listItem.querySelector("#list-item-size");
-    const shoeItemQuantity = listItem.querySelector("#list-item-quantity");
-    shoeItemType.innerText = "Type: " + shoeItem.type;
-    shoeItemColour.innerText = "Colour: " + shoeItem.colour;
-    shoeItemMaterial.innerText = "Material: " + shoeItem.material;
-    shoeItemSize.innerText = "Size: " + shoeItem.size;
-    shoeItemQuantity.innerText = "Quantity: " + shoeItem.quantity;
+    const subHeader = listItem.querySelector(".sub-header");
+      const paragraf = listItem.getElementById("shoe-item");
+      paragraf.innerText = JSON.stringify(json, null, 4);
+        subHeader.innerHTML = "All shoes in storage";
 
-    ul.append(listItem);
-  }
+      // removeBtn.addEventListener("click", () => removeTodoItem(todoItem));
+      // editBtn.addEventListener("click", () => displayTodoForm(todoItem));
+
+      ul.append(listItem);
+    })
+    .catch((err) => console.log("Request Failed", err));
+}
+
+async function fetchOneShoe() {
+  const ul = document.getElementById("shoe-list");
+  const itemTemplate = document.getElementById("shoe-item-template");
+  const searchTemplate = document.getElementById("search-template");
+  ul.innerHTML = "";
+  const input = document.getElementById("ID");
+  console.log("Inne i fetchOneShoe");
+
+  await fetch("/api/shoes/" + input.value)
+    .then((response) => response.json())
+    .then((json) => {
+      const listItem = itemTemplate.content.cloneNode(true);
+      const paragraf = listItem.getElementById("shoe-item");
+      paragraf.innerText = JSON.stringify(json, null, 4);
+
+      ul.append(listItem);
+    })
+    .catch((err) => console.log("Request Failed", err));
+
+  input.value = "";
 }
