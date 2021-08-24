@@ -1,0 +1,59 @@
+body {
+    background: url(./images/layer.png), url(./images/shoes.jpg);
+    background-size: .2%, 100%;
+    padding: 0;
+    margin: 0;
+}
+
+header {
+    background: #000;
+    height: 4rem;
+}
+
+button {
+    opacity: 100%;
+    border-radius: .5rem;
+    background-color: whitesmoke;
+    width: 10rem;
+    padding: .5rem;
+    margin: .2rem;
+}
+
+.company {
+    color: #fff;
+    font-size: 2rem;
+    padding: 0;
+    margin-left: 1rem;
+}
+
+.container {
+    padding: 1rem;
+    margin: 3rem;
+    width: 40vw;
+    font-size: 2rem;
+    border: .15rem solid black;
+    background: white;
+    color: #000;
+    /* opacity: 80%; */
+    border-radius: 0.1rem;
+}
+
+.flex {
+    display: flex;
+}
+
+.col {
+    flex-direction: column;
+}
+
+.wrap {
+    flex-wrap: wrap;
+}
+
+.justify-start {
+    justify-content: flex-start;
+}
+
+.align-center {
+    align-items: center;
+}
