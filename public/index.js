@@ -106,8 +106,8 @@ async function fetchAllItems() {
         const listItem = extractItemTemplate();
         const deleteBtn = listItem.getElementById("delete-btn");
         const editBtn = listItem.getElementById("edit-btn");
-        const paragraf = listItem.getElementById("item-container");
-        paragraf.innerText = JSON.stringify(item, null, 4);
+        const itemContainer = listItem.getElementById("item-container");
+        itemContainer.innerText = JSON.stringify(item, null, 4);
 
         deleteBtn.addEventListener("click", () => deleteItem(item));
         editBtn.addEventListener("click", () => displayForm(item));
@@ -130,8 +130,8 @@ async function fetchOneItem() {
     .then((response) => response.json())
     .then((item) => {
       const listItem = extractItemTemplate();
-      const paragraf = listItem.getElementById("item-container");
-      paragraf.innerText = JSON.stringify(item, null, 4);
+      const itemContainer = listItem.getElementById("item-container");
+      itemContainer.innerText = JSON.stringify(item, null, 4);
 
       const deleteBtn = listItem.getElementById("delete-btn");
       const editBtn = listItem.getElementById("edit-btn");
