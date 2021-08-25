@@ -2,6 +2,7 @@ const { json } = require('express');
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
+const { v4: uuidv4 } = require("uuid");
 
 let shoesPath = path.resolve(__dirname, 'shoes.json');
 
@@ -18,9 +19,6 @@ const readJsonFile = () => {
     return shoes;
 }
 
-let shoeIdIndex = 1;
-let shoesContainer = []
-
 const getShoes = (req, res) => {
     res.status(200).json(readJsonFile());
 }
@@ -33,7 +31,7 @@ const getOneShoe = (req, res) => {
 }
 
 const addShoe = (req, res) => {
-    const shoe = {...req.body, id: shoeIdIndex++};
+    const shoe = {...req.body, id: uuidv4()};
     const newList = readJsonFile();
     newList.push(shoe);
     fs.writeFile(shoesPath, JSON.stringify(newList, null, 4), (err) => {
