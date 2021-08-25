@@ -9,34 +9,78 @@
     <script src="index.js"></script>
   </head>
   <body>
+      <!-- Header -->
     <header class="flex justify-start align-center">
       <p class="company">The Shoe Storage</p>
     </header>
+    <!-- Main -->
     <div class="flex col wrap justify-start container">
       <h3>Welcome to The Shoe Storage</h3>
+      <!-- Main buttons -->
       <div class="flex row">
         <button id="all-btn">See all shoes</button>
         <button id="search-btn">Search</button>
         <button id="add-btn">Add shoe</button>
       </div>
-      <div id="input-field"></div>
-      <template id="search-template">
+      <!-- Search-display -->
+      <div id="search-field"></div>
+      <!-- Form -->
+      <div id="form-container"></div>
+      <template id="post-edit-template">
+        <form id="post-edit-form">
+          <label for="item-type">
+            <h6>Type:</h6>
+          </label>
+          <input type="text" id="item-type" name="item-type" value="" />
+          <label for="item-colour">
+            <h6>Colour:</h6>
+          </label>
+          <input type="text" id="item-colour" name="item-colour" value="" />¨
+          <label for="item-material">
+            <h6>Material:</h6>
+          </label>
+          <input type="text" id="item-material" name="item-material" value="" />
+          <label for="item-size">
+            <h6>Size(EU):</h6>
+          </label>
+          <input type="number" id="item-size" name="item-size" value="" />
+          <label for="item-quantity">
+            <h6>Quantity:</h6>
+          </label>
           <input
             type="number"
-            id="ID"
-            name="ID"
-            class="ID"
+            id="item-quantity"
+            name="item-quantity"
             value=""
-            required
-            />
-            <button id="submit-btn">Submit</button>
+          />
+          <input type="submit" value="Save" id="submit-btn" />
+        </form>
       </template>
-      <template id="shoe-item-template">
-            <h5 class="sub-header"></h5>
-            <p id="shoe-item"></p>
-        </template>
-        <ul id="shoe-list"></ul>
-      </div>
+      <!-- Search-input-field -->
+      <template id="search-template">
+        <label for="search-item">
+          <h6>Enter ID to search</h6>
+        </label>
+        <input
+          type="number"
+          id="search-item"
+          name="search-item"
+          class="search-item"
+          value=""
+          required
+        />
+        <button id="submit-search-btn">Submit</button>
+      </template>
+      <!-- Result-header -->
+      <h5 class="sub-header"></h5>
+      <!-- Item -->
+      <template id="item-template">
+        <p id="item-container"></p>
+        <button id="delete-btn">Delete</button>
+        <button id="edit-btn">Edit</button>
+      </template>
+      <!-- Unsorted list for items -->
+      <ul id="item-list"></ul>
     </div>
   </body>
 </html>
