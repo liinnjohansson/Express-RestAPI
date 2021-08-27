@@ -9,58 +9,25 @@
     <script src="index.js"></script>
   </head>
   <body>
-      <!-- Header -->
+    <!-- Header -->
     <header class="flex justify-start align-center">
       <p class="company">The Shoe Storage</p>
     </header>
     <!-- Main -->
-    <div class="flex col wrap justify-start container">
+    <div class="flex col main-container">
       <h3>Welcome to The Shoe Storage</h3>
       <!-- Main buttons -->
       <div class="flex row">
-        <button id="all-btn">See all shoes</button>
-        <button id="search-btn">Search</button>
-        <button id="add-btn">Add shoe</button>
+        <button id="all-btn" class="main-btn">See all shoes</button>
+        <button id="search-btn" class="main-btn">Search</button>
+        <button id="add-btn" class="main-btn">Add shoe</button>
       </div>
       <!-- Search-display -->
       <div id="search-field"></div>
-      <!-- Form -->
-      <div id="form-container"></div>
-      <template id="post-edit-template">
-        <form id="post-edit-form">
-          <label for="item-type">
-            <p>Type:</p>
-          </label>
-          <input type="text" id="item-type" name="item-type" value="" required />
-          <label for="item-colour">
-            <p>Colour:</p>
-          </label>
-          <input type="text" id="item-colour" name="item-colour" value="" required/>¨
-          <label for="item-material">
-            <p>Material:</p>
-          </label>
-          <input type="text" id="item-material" name="item-material" value="" required/>
-          <label for="item-size">
-            <p>Size(EU):</p>
-          </label>
-          <input type="number" id="item-size" name="item-size" value="" required/>
-          <label for="item-quantity">
-            <p>Quantity:</p>
-          </label>
-          <input
-            type="number"
-            id="item-quantity"
-            name="item-quantity"
-            value=""
-            required
-          />
-          <input type="submit" value="Save" id="submit-btn" />
-        </form>
-      </template>
       <!-- Search-input-field -->
       <template id="search-template">
         <label for="search-item">
-          <h6>Enter ID to search</h6>
+          <p class="search-header">Enter ID to search<p>
         </label>
         <input
           type="text"
@@ -69,18 +36,75 @@
           class="search-item"
           value=""
         />
-        <button id="submit-search-btn">Submit</button>
+        <button id="submit-search-btn" class="small-btn">Submit</button>
       </template>
-      <!-- Result-header -->
+      <!-- Form -->
+      <div id="form-container"></div>
+      <template id="post-edit-template">
+        <form id="post-edit-form">
+          <label for="item-type">
+            <p class="input-label">Type:</p>
+          </label>
+          <input
+            type="text"
+            id="item-type"
+            name="item-type"
+            value=""
+            required
+          />
+          <label for="item-colour">
+            <p class="input-label">Colour:</p>
+          </label>
+          <input
+            type="text"
+            id="item-colour"
+            name="item-colour"
+            value=""
+            required
+          />
+          <label for="item-material">
+            <p class="input-label">Material:</p>
+          </label>
+          <input
+            type="text"
+            id="item-material"
+            name="item-material"
+            value=""
+            required
+          />
+          <label for="item-size">
+            <p class="input-label">Size(EU):</p>
+          </label>
+          <input
+            type="number"
+            id="item-size"
+            name="item-size"
+            value=""
+            required
+          />
+          <label for="item-quantity">
+            <p class="input-label">Quantity:</p>
+          </label>
+          <input
+            type="number"
+            id="item-quantity"
+            name="item-quantity"
+            value=""
+            required
+          />
+          <input type="submit" value="Save" id="submit-btn" class="small-btn" />
+        </form>
+      </template>
+      <!-- Result header -->
       <h5 class="sub-header"></h5>
       <!-- Item -->
       <template id="item-template">
         <p id="item-container"></p>
-        <button id="delete-btn">Delete</button>
-        <button id="edit-btn">Edit</button>
+        <button id="delete-btn" class="main-btn">Delete</button>
+        <button id="edit-btn" class="main-btn">Edit</button>
       </template>
       <!-- Error message -->
-       <template id="error-template">
+      <template id="error-template">
         <p id="error-container"></p>
       </template>
       <!-- Unsorted list for items -->
