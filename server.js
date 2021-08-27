@@ -1,8 +1,12 @@
 const express = require('express');
 const shoesRouter = require('./shoes.router');
+
+//Create instance of express
 const app = express();
 
+//Parse incoming data to JSON
 app.use(express.json());
+
 
 app.use(express.static('public'));
 
