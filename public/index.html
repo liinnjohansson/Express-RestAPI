@@ -29,29 +29,30 @@
       <template id="post-edit-template">
         <form id="post-edit-form">
           <label for="item-type">
-            <h6>Type:</h6>
+            <p>Type:</p>
           </label>
-          <input type="text" id="item-type" name="item-type" value="" />
+          <input type="text" id="item-type" name="item-type" value="" required />
           <label for="item-colour">
-            <h6>Colour:</h6>
+            <p>Colour:</p>
           </label>
-          <input type="text" id="item-colour" name="item-colour" value="" />¨
+          <input type="text" id="item-colour" name="item-colour" value="" required/>¨
           <label for="item-material">
-            <h6>Material:</h6>
+            <p>Material:</p>
           </label>
-          <input type="text" id="item-material" name="item-material" value="" />
+          <input type="text" id="item-material" name="item-material" value="" required/>
           <label for="item-size">
-            <h6>Size(EU):</h6>
+            <p>Size(EU):</p>
           </label>
-          <input type="number" id="item-size" name="item-size" value="" />
+          <input type="number" id="item-size" name="item-size" value="" required/>
           <label for="item-quantity">
-            <h6>Quantity:</h6>
+            <p>Quantity:</p>
           </label>
           <input
             type="number"
             id="item-quantity"
             name="item-quantity"
             value=""
+            required
           />
           <input type="submit" value="Save" id="submit-btn" />
         </form>
@@ -67,7 +68,6 @@
           name="search-item"
           class="search-item"
           value=""
-          required
         />
         <button id="submit-search-btn">Submit</button>
       </template>
@@ -78,6 +78,10 @@
         <p id="item-container"></p>
         <button id="delete-btn">Delete</button>
         <button id="edit-btn">Edit</button>
+      </template>
+      <!-- Error message -->
+       <template id="error-template">
+        <p id="error-container"></p>
       </template>
       <!-- Unsorted list for items -->
       <ul id="item-list"></ul>
