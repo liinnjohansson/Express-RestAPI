@@ -23,7 +23,7 @@ function addClickEventOnAddButton() {
   btn.addEventListener("click", () => displayForm());
 }
 
-// Extracts templates for items, search-display and form
+// Extracts templates for items, search-display, form and error
 
 //Item template
 
@@ -45,8 +45,15 @@ function extractSearchTemplate() {
 
 function extractFormTemplate() {
   const template = document.getElementById("post-edit-template");
-  const formNode = template.content.cloneNode(true);
-  const form = formNode.getElementById("post-edit-form");
+  const form = template.content.cloneNode(true);
+  return form;
+}
+
+//Error template
+
+function extractErrorTemplate() {
+  const template = document.getElementById("error-template");
+  const form = template.content.cloneNode(true);
   return form;
 }
 
@@ -82,14 +89,62 @@ function displaySearchField() {
   searchField.append(inputField);
 }
 
+//Sets values on form input fields based on item to edit
+
+function setInputValuesWhenEditItem(form, item) {
+  const type = form.getElementById("item-type");
+  const colour = form.getElementById("item-colour");
+  const material = form.getElementById("item-material");
+  const size = form.getElementById("item-size");
+  const quantity = form.getElementById("item-quantity");
+  type.value = item.type;
+  colour.value = item.colour;
+  material.value = item.material;
+  size.value = item.size;
+  quantity.value = item.quantity;
+}
+
 //Displays form for adding or editing item
 
 function displayForm(item) {
   clearElements();
   const formContainer = document.getElementById("form-container");
-  const form = extractFormTemplate();
+  const formTemplate = extractFormTemplate();
+  const form = formTemplate.getElementById("post-edit-form");
+
+  if (item) {
+    setInputValuesWhenEditItem(formTemplate, item);
+  }
+
   formContainer.append(form);
   form.onsubmit = (event) => addOrEditItem(event, item);
+}
+
+//Creates a list item
+
+function createListItem(item) {
+  const ul = document.getElementById("item-list");
+  const listItem = extractItemTemplate();
+  const deleteBtn = listItem.getElementById("delete-btn");
+  const editBtn = listItem.getElementById("edit-btn");
+  const itemContainer = listItem.getElementById("item-container");
+  itemContainer.innerText = JSON.stringify(item, null, 4);
+
+  deleteBtn.addEventListener("click", () => deleteItem(item));
+  editBtn.addEventListener("click", () => displayForm(item));
+
+  ul.append(listItem);
+}
+
+//Creates a error item (error message)
+
+function createErrorItem(item) {
+  const ul = document.getElementById("item-list");
+  const errorTemplate = extractErrorTemplate();
+  const errorContainer = errorTemplate.getElementById("error-container");
+  console.log(errorContainer);
+  errorContainer.innerHTML = item;
+  ul.append(errorTemplate);
 }
 
 //Fetches all items from api
@@ -97,25 +152,17 @@ function displayForm(item) {
 async function fetchAllItems() {
   clearElements();
   setSubHeader("All items in storage");
-  const ul = document.getElementById("item-list");
 
-  await fetch("/api/shoes")
-    .then((response) => response.json())
-    .then((items) => {
-      for (const item of items) {
-        const listItem = extractItemTemplate();
-        const deleteBtn = listItem.getElementById("delete-btn");
-        const editBtn = listItem.getElementById("edit-btn");
-        const itemContainer = listItem.getElementById("item-container");
-        itemContainer.innerText = JSON.stringify(item, null, 4);
-
-        deleteBtn.addEventListener("click", () => deleteItem(item));
-        editBtn.addEventListener("click", () => displayForm(item));
-
-        ul.append(listItem);
-      }
-    })
-    .catch((err) => console.log("Request Failed", err));
+  const response = await fetch("/api/shoes");
+  const items = await response.json();
+  
+  if (response.ok) {
+    for (const item of items) {
+      createListItem(item);
+    }
+  } else {
+    createErrorItem(item);
+  }
 }
 
 //Fetches one specific item from api, by requested Id
@@ -126,30 +173,21 @@ async function fetchOneItem() {
   ul.innerHTML = "";
   const input = document.getElementById("search-item");
 
-  await fetch("/api/shoes/" + input.value)
-    .then((response) => response.json())
-    .then((item) => {
-      const listItem = extractItemTemplate();
-      const itemContainer = listItem.getElementById("item-container");
-      itemContainer.innerText = JSON.stringify(item, null, 4);
+  const response = await fetch("/api/shoes/" + input.value);
+  const item = await response.json();
 
-      const deleteBtn = listItem.getElementById("delete-btn");
-      const editBtn = listItem.getElementById("edit-btn");
-      deleteBtn.addEventListener("click", () => deleteItem(item));
-      editBtn.addEventListener("click", () => displayForm(item));
-
-      ul.append(listItem);
-    })
-    .catch((err) => {
-      console.log("Request Failed", err);
-    });
+  if (response.ok) {
+    createListItem(item);
+  } else {
+    createErrorItem(item);
+  }
 
   input.value = "";
 }
 
-//Adds or edits (PUT or POST) one item to/from api
+//Calls add or edit methods (PUT or POST)
 
-async function addOrEditItem(event, item) {
+function addOrEditItem(event, item) {
   event.preventDefault();
   const inputType = event.target.querySelector("#item-type");
   const inputColour = event.target.querySelector("#item-colour");
@@ -165,66 +203,84 @@ async function addOrEditItem(event, item) {
     quantity: inputQuantity.value,
   };
 
-  if (item) editItem(item, newItem);
-  else addItem(newItem);
+  if (item) {
+    editItem(item, newItem);
+  } else {
+    addItem(newItem);
+  }
 }
 
-//Adds one item to api
+//Adds one item thru api
 
 async function addItem(item) {
-  await fetch("/api/shoes", {
+  setSubHeader("Result");
+
+  const response = await fetch("/api/shoes", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(item),
-  })
-    .then((data) => {
-      if (!data.ok) {
-        throw Error(data.status);
-      }
-      return data.json();
-    })
-    .then((item) => {
-      console.log(item);
-    })
-    .catch((e) => {
-      console.log(e);
-    });
+  });
+  const responseItem = await response.json();
+
+  if (response.ok) {
+    createListItem(responseItem);
+  } else {
+    createErrorItem(responseItem);
+  }
+
+  const formContainer = document.getElementById("form-container");
+  formContainer.innerHTML = "";
 }
 
 //Updates one specific item in api, by requested Id
 
 async function editItem(item, update) {
-  await fetch("/api/shoes/" + item.id, {
+  setSubHeader("Result");
+
+  const response = await fetch("/api/shoes/" + item.id, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(update),
-  })
-    .then((data) => {
-      if (!data.ok) {
-        throw Error(data.status);
-      }
-      return data.json();
-    })
-    .then((update) => {
-      console.log(update);
-    })
-    .catch((e) => {
-      console.log(e);
-    });
+  });
+  const responseItem = await response.json();
+
+  if (response.ok) {
+    createListItem(responseItem);
+  } else {
+    createErrorItem(responseItem);
+  }
+
+  const formContainer = document.getElementById("form-container");
+  formContainer.innerHTML = "";
 }
 
 //Deletes one specific item in api, by requested Id
 
 async function deleteItem(item) {
-  await fetch("api/shoes/" + item.id, {
+  const ul = document.getElementById("item-list");
+  ul.innerHTML = "";
+  setSubHeader("Result");
+
+  const response = await fetch("api/shoes/" + item.id, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(item),
   });
+  const responseItem = await response.json();
+  if (response.ok) {
+    const message = document.createElement("p");
+    message.innerHTML = responseItem;
+    ul.append(message);
+  } else {
+    const errorTemplate = extractErrorTemplate();
+    const errorContainer = errorTemplate.getElementById("error-container");
+    errorContainer.innerHTML = responseItem;
+    ul.append(errorTemplate);
+  }
 }
