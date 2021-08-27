@@ -7,7 +7,6 @@ function main() {
 }
 
 //Adds events to main buttons
-
 function addClickEventOnFetchAllItemsButton() {
   const btn = document.getElementById("all-btn");
   btn.addEventListener("click", () => fetchAllItems());
@@ -26,7 +25,6 @@ function addClickEventOnAddButton() {
 // Extracts templates for items, search-display, form and error
 
 //Item template
-
 function extractItemTemplate() {
   const template = document.getElementById("item-template");
   const listItem = template.content.cloneNode(true);
@@ -34,7 +32,6 @@ function extractItemTemplate() {
 }
 
 //Search-display template
-
 function extractSearchTemplate() {
   const template = document.getElementById("search-template");
   const inputField = template.content.cloneNode(true);
@@ -42,7 +39,6 @@ function extractSearchTemplate() {
 }
 
 //Form template
-
 function extractFormTemplate() {
   const template = document.getElementById("post-edit-template");
   const form = template.content.cloneNode(true);
@@ -50,7 +46,6 @@ function extractFormTemplate() {
 }
 
 //Error template
-
 function extractErrorTemplate() {
   const template = document.getElementById("error-template");
   const form = template.content.cloneNode(true);
@@ -58,14 +53,12 @@ function extractErrorTemplate() {
 }
 
 // Sets the small header above result depending on type of result
-
 function setSubHeader(text) {
   subHeader = document.querySelector(".sub-header");
   subHeader.innerHTML = text;
 }
 
 //Clears HTML-elements(tags) when switching feature
-
 function clearElements() {
   const ul = document.getElementById("item-list");
   const searchField = document.getElementById("search-field");
@@ -78,7 +71,6 @@ function clearElements() {
 }
 
 //Displays the search-field when clicking main search button
-
 function displaySearchField() {
   clearElements();
   const searchField = document.getElementById("search-field");
@@ -90,7 +82,6 @@ function displaySearchField() {
 }
 
 //Sets values on form input fields based on item to edit
-
 function setInputValuesWhenEditItem(form, item) {
   const type = form.getElementById("item-type");
   const colour = form.getElementById("item-colour");
@@ -105,7 +96,6 @@ function setInputValuesWhenEditItem(form, item) {
 }
 
 //Displays form for adding or editing item
-
 function displayForm(item) {
   clearElements();
   const formContainer = document.getElementById("form-container");
@@ -121,7 +111,6 @@ function displayForm(item) {
 }
 
 //Creates a list item
-
 function createListItem(item) {
   const ul = document.getElementById("item-list");
   const listItem = extractItemTemplate();
@@ -137,7 +126,6 @@ function createListItem(item) {
 }
 
 //Creates a error item (error message)
-
 function createErrorItem(item) {
   const ul = document.getElementById("item-list");
   const errorTemplate = extractErrorTemplate();
@@ -148,7 +136,6 @@ function createErrorItem(item) {
 }
 
 //Fetches all items from api
-
 async function fetchAllItems() {
   clearElements();
   setSubHeader("All items in storage");
@@ -166,7 +153,6 @@ async function fetchAllItems() {
 }
 
 //Fetches one specific item from api, by requested Id
-
 async function fetchOneItem() {
   setSubHeader("Result after search");
   const ul = document.getElementById("item-list");
@@ -186,7 +172,6 @@ async function fetchOneItem() {
 }
 
 //Calls add or edit methods (PUT or POST)
-
 function addOrEditItem(event, item) {
   event.preventDefault();
   const inputType = event.target.querySelector("#item-type");
@@ -211,7 +196,6 @@ function addOrEditItem(event, item) {
 }
 
 //Adds one item thru api
-
 async function addItem(item) {
   setSubHeader("Result");
 
@@ -235,7 +219,6 @@ async function addItem(item) {
 }
 
 //Updates one specific item in api, by requested Id
-
 async function editItem(item, update) {
   setSubHeader("Result");
 
@@ -259,7 +242,6 @@ async function editItem(item, update) {
 }
 
 //Deletes one specific item in api, by requested Id
-
 async function deleteItem(item) {
   const ul = document.getElementById("item-list");
   ul.innerHTML = "";
