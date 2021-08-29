@@ -1,94 +1,107 @@
+/* Element styling */
+
 body {
-    background: url(./images/shoe-background.jpg);
-    background-size: 100vw;
-    padding: 0;
-    margin: 0;
+  background: url(./images/shoe-background.jpg);
+  background-size: 100vw;
+  padding: 0;
+  margin: 0;
 }
 
 header {
-    background: #000;
-    height: 4rem;
-}
-
-button {
-    opacity: 100%;
-    border-radius: .5rem;
-    border: .1rem solid black;
-    background-color: whitesmoke;
-    width: 10rem;
-    padding: .5rem;
-    margin: .2rem;
+  background: #000;
+  height: 4rem;
 }
 
 h5 {
-    padding: 0;
-    margin-bottom: 0;
+  padding: 0;
+  margin-bottom: 0;
 }
 
 p {
-    font-size: 1.2rem;
-    padding: 0;
-    margin: 0;
+  font-size: 1.2rem;
+  padding: 0;
+  margin: 0;
 }
 
 ul {
-    padding-left: 0;
+  padding-left: 0.2rem;
 }
 
-.search-label {
-    font-size: 1rem;
+form {
+  margin-top: 3rem;
+}
+
+/* Specific class styling */
+
+.main-container {
+  padding-left: 2.5rem;
+  margin: 3rem;
+  width: 40vw;
+  font-size: 2rem;
+  border: 0.1rem solid black;
+  background: white;
+  color: #000;
+  border-radius: 0.1rem;
+}
+
+.main-btn {
+  border-radius: 0.3rem;
+  border: 0.1rem solid black;
+  background-color: whitesmoke;
+  width: 10rem;
+  padding: 0.5rem;
+  margin-right: 1rem;
+}
+
+.small-btn {
+  border-radius: 0.15rem;
+  border: 0.1rem solid black;
+  background-color: whitesmoke;
+  margin-left: 0.5rem;
+}
+
+.search-header {
+  margin-top: 3rem;
+}
+
+.input-label {
+  margin-top: 1rem;
+  margin-bottom: -0.8rem;
 }
 
 .company {
-    color: #fff;
-    font-size: 2rem;
-    padding: 0;
-    margin-left: 1rem;
+  color: #fff;
+  font-size: 2rem;
+  padding: 0;
+  margin-left: 1rem;
 }
 
-.container {
-    padding: 1rem;
-    margin: 3rem;
-    width: 40vw;
-    font-size: 2rem;
-    border: .1rem solid black;
-    background: white;
-    color: #000;
-    /* opacity: 80%; */
-    border-radius: 0.1rem;
-}
 
 .list-item {
-    padding-left: 0;
-    padding-top: 1rem;
-    padding-bottom: 1rem;
-    border-bottom: .1rem solid black;
+  padding-left: 0;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 0.1rem solid black;
 }
 
+/* Re-usable class styling */
+
 .flex {
-    display: flex;
+  display: flex;
 }
 
 .col {
-    flex-direction: column;
+  flex-direction: column;
 }
 
 .row {
-    flex-direction: row;
-}
-
-.wrap {
-    flex-wrap: wrap;
-}
-
-.no-wrap {
-    flex-wrap: nowrap;
+  flex-direction: row;
 }
 
 .justify-start {
-    justify-content: flex-start;
+  justify-content: flex-start;
 }
 
 .align-center {
-    align-items: center;
+  align-items: center;
 }
