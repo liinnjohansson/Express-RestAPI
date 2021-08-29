@@ -142,13 +142,14 @@ async function fetchAllItems() {
 
   const response = await fetch("/api/shoes");
   const items = await response.json();
-  
+
   if (response.ok) {
     for (const item of items) {
       createListItem(item);
     }
   } else {
-    createErrorItem(item);
+    setSubHeader("");
+      createErrorItem(items);
   }
 }
 
