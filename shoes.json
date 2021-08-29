@@ -1,9 +1,18 @@
 [
     {
-        "type": "flats",
-        "colour": "pink",
-        "material": "plastic",
-        "size": 38,
-        "id": 2
+        "type": "Heels",
+        "colour": "Black",
+        "material": "Leather",
+        "size": "38",
+        "quantity": "20",
+        "id": "c24a31e3-ec50-4e4b-98f7-d674b4932d15"
+    },
+    {
+        "type": "Sneakers",
+        "colour": "White",
+        "material": "Canvas",
+        "size": "40",
+        "quantity": "30",
+        "id": "5e01944e-6db9-467c-8746-a999470664b5"
     }
 ]
